@@ -49,9 +49,7 @@ public class GameController : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        Debug.Log("SpawnObstacle");
         int spawnIndex = random.Next(0, Obstacles.Count);
-        Debug.Log(spawnIndex);
         var obj = GameObject.Instantiate(Obstacles[spawnIndex]);
         obj.SetActive(true);
         obj.transform.position = new Vector3 (SpawnerTop.position.x, (float)GetNextPosition(), -1);

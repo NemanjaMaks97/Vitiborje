@@ -5,12 +5,11 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private float speed;
 
-    public Rigidbody2D Rigidbody2D;
+    public Rigidbody Rigidbody;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -18,7 +17,12 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Rigidbody2D.linearVelocityY = speed;
+            Rigidbody.linearVelocity = new Vector3(0, speed, 0 );
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        gameObject.SetActive(false);
     }
 }
