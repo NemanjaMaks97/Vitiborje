@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -11,20 +14,20 @@ public class GameController : MonoBehaviour
     public Transform SpawnerTop;
     public Transform SpawnerBottom;
 
-    private Timer timer;
+    private int score;
+    public Text ScoreText;
+
     private System.Random random;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //SpawnObstacle();
+        score = 0;
+        ScoreText.text = score.ToString();
         random = new System.Random();
-        //timer = new Timer(2000);
-        //timer.Elapsed += Timer_Elapsed;
-        //timer.AutoReset = false;
-        //timer.Enabled = true;
-        //timer.Start();
         StartCoroutine(SpawnTimer());
+        StartCoroutine(ScoreUpdate());
     }
 
     private IEnumerator SpawnTimer()
@@ -33,6 +36,16 @@ public class GameController : MonoBehaviour
         {
             yield return new WaitForSeconds(random.Next(1, 2));
             SpawnObstacle();
+        }
+    }
+
+    private IEnumerator ScoreUpdate()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            score += 10;
+            ScoreText.text = score.ToString();
         }
     }
 
